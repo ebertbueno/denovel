@@ -11,7 +11,7 @@ export class HomeController {
      */
 
     async get({request,response,params}: RouterContext){
-        response.body = "Denovel"
+        response.body = "Denovel";
     }  
 
     /**

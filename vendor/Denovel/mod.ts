@@ -1,6 +1,9 @@
-import app from "./Support/Facades/Http.ts";
+import { app } from "./Support/Facades/Http.ts";
 import { parse } from "https://deno.land/std/flags/mod.ts";
 import { config } from "https://deno.land/x/dotenv/mod.ts";
+import {
+	success,
+} from 'https://deno.land/x/colorlog/mod.ts';
 
 /**
  * Denovel - A Deno Framework for Web Artisan
@@ -31,11 +34,11 @@ const port = {
 
 export class Server {
 	async run(): Promise<void>{
-	    console.log(`Listening on port ${port.args || port.env || port.default} ...`);
+	    console.log(success(`Listening on port ${port.args || port.env || port.default} ...`));
 	    await app.listen({ port: port.args || port.env || port.default });		
 	}
 
 	versioning(){
-		console.log("Denovel v1.1.0");
+		console.log(success("Denovel v1.1.0"));
 	}
 }

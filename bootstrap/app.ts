@@ -4,6 +4,13 @@ import {
 	Denomand
 } from "../vendor/mod.ts";
 
+import ProviderRepository from "../vendor/Foundation/ProviderRepository.ts";
+
+import AppConfig from "../config/app.ts";
+
+const providerRepository: any = new ProviderRepository();
+const providerList = await providerRepository.getProviders(AppConfig.providers);
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -28,15 +35,14 @@ const app = new Foundation;
 |
 */
 
+for(let i in providerList){
+	app.singleton(providerList[i].value);
+}
+
 app.singleton(new Server);
 
 app.singleton(new Denomand);
 
-
-
-
-
-
 /* Export Foundation */
 
-export default app;
+export { app };
