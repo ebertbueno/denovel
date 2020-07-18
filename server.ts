@@ -1,5 +1,4 @@
 import { app } from "./bootstrap/app.ts";
-
 /**
  * Denovel - A Deno Framework for Web Artisan
  *
@@ -7,10 +6,10 @@ import { app } from "./bootstrap/app.ts";
  * @author   Muhammad Fauzan <developerfauzan@asraja.com>
  */
 
-app.make("AppServicesProvider")['register']();
+app.make("AppServicesProvider")["register"]();
 
 app.make("Server").versioning();
 
 app.make("Server").run();
 
-app.make("AppServicesProvider")['boot']();
+app.make("AppServicesProvider")["boot"]();
