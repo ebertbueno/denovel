@@ -11,27 +11,24 @@ import { config } from "https://deno.land/x/dotenv/mod.ts";
 */
 
 export interface mysql {
-    hostname: string;
-    username: string;
-    password: string;
-    db: string;
-    port: number;
+  host: string;
+  username: string;
+  password: string;
+  database: string;
 }
 
 export interface postgres {
-    host: string;
-    user: string;
-    password: string;
-    port: number;
-    database: string;
+  host: string;
+  username: string;
+  password: string;
+  database: string;
 }
 
 export interface mongo {
-    hostname: string;
-    username: string; //optional
-    db: string;
-    password: string; //optional
-    port: number;
+  host: string;
+  username: string;
+  password: string;
+  database: string;
 }
 
 /*
@@ -51,33 +48,30 @@ export interface mongo {
 */
 
 export const Mysql: mysql = {
-    hostname: config().DB_HOST || 'localhost',
-    username: config().DB_USER || 'root',
-    password: config().DB_PASS || '',
-    db: config().DB_NAME || 'denovel',
-    port: 3306,
-}
+  host: config().DB_HOST || "localhost",
+  username: config().DB_USER || "root",
+  password: config().DB_PASS || "",
+  database: config().DB_NAME || "denovel",
+};
 
 export const Postgres: postgres = {
-    host: config().DB_HOST || 'localhost',
-    user: config().DB_USER || 'root',
-    password: config().DB_PASS || '',
-    port: parseInt(config().DB_PORT) || 5432,
-    database: config().DB_NAME || 'denovel',
-}
+  host: config().DB_HOST || "localhost",
+  username: config().DB_USER || "root",
+  password: config().DB_PASS || "",
+  database: config().DB_NAME || "denovel",
+};
 
 export const Mongo: mongo = {
-    hostname: config().DB_HOST || 'mongodb://localhost',
-    username: config().DB_USER, //optional
-    db: config().DB_NAME || 'denovel',
-    password: config().DB_PASS, //optional
-    port: parseInt(config().DB_PORT) || 27017,
-}
+  host: config().DB_HOST || "mongodb://localhost",
+  username: config().DB_USER, //optional
+  password: config().DB_PASS, //optional
+  database: config().DB_NAME || "denovel",
+};
 
 /**
  * Export connection name
- * 
- * 
+ *
+ *
  */
 
 export const Connection = config().DB_CONNECTION;

@@ -1,4 +1,4 @@
-import { init, MongoClient,Database } from "https://deno.land/x/mongo@v0.6.0/mod.ts";
+import { MongoClient } from "https://deno.land/x/mongo@v0.9.1/mod.ts";
 import { mongo } from "../../../config/database.ts";
 
 /**
@@ -10,16 +10,15 @@ import { mongo } from "../../../config/database.ts";
 
 /**
  * Connection client
- * 
- * 
+ *
+ *
  */
 
-export async function connectMongo(Mongo: mongo): Promise<Database>{
-    await init();
-    
-    const client = new MongoClient();
-    client.connectWithUri(`${Mongo.hostname}:${Mongo.port}`);
-    const db = client.database(`${Mongo.db}`);
+export async function connectMongo(Mongo: mongo): Promise<any> {
+  const client = new MongoClient();
 
-    return db; 
+  client.connectWithUri(`${Mongo.hostname}:${Mongo.port}`);
+  const db = client.database(`${Mongo.db}`);
+
+  return db;
 }

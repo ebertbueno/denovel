@@ -1,5 +1,5 @@
 import { app } from "./Support/Facades/Http.ts";
-import { parse } from "https://deno.land/std/flags/mod.ts";
+import { parse } from "https://deno.land/std@0.62.0/flags/mod.ts";
 import { config } from "https://deno.land/x/dotenv/mod.ts";
 import { success, error } from "https://deno.land/x/colorlog/mod.ts";
 
@@ -42,6 +42,6 @@ export class Server {
   }
 
   versioning() {
-    console.log(success("Denovel v1.1.0"));
+    console.log(success("Denovel v1.2.0"));
   }
 }

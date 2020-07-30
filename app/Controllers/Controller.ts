@@ -5,5 +5,7 @@ import {
 } from "https://deno.land/x/validasaur/mod.ts";
 
 export class Controller {
-  validate(options: object) {}
+  validate(options: object) {
+    return options;
+  }
 }

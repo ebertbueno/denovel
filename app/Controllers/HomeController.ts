@@ -1,7 +1,7 @@
 import { Controller } from "./Controller.ts";
-import { database } from "../../vendor/Denovel/Support/Facades/DB.ts";
-import * as dejs from "https://deno.land/x/dejs@0.6.0/mod.ts";
+import * as dejs from "https://deno.land/x/dejs@0.8.0/mod.ts";
 import { RouterContext } from "../../vendor/Denovel/Support/Facades/Request.ts";
+import { User } from "../Model/User.ts";
 
 export class HomeController extends Controller {
   /**
@@ -11,8 +11,7 @@ export class HomeController extends Controller {
    */
 
   async get({ request, response, params }: RouterContext) {
-    let data = await database.execute("SELECT * FROM todo");
-    response.body = data.rows;
+    response.body = super.validate({ name: "wekwk" });
   }
 
   /**
