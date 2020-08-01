@@ -1,15 +1,5 @@
-import {
-  Mongo,
-  Postgres,
-  Mysql,
-  Connection,
-} from "../../../../config/database.ts";
-
-import {
-  DataTypes,
-  Database,
-  Model,
-} from "../../deps.ts";
+import { DataTypes, Database, Model } from "https://deno.land/x/denodb/mod.ts";
+import { DBInterface, Connection } from "../../../../config/database.ts";
 
 /**
  * Denovel - A Deno Framework for Web Artisan
@@ -18,14 +8,11 @@ import {
  * @author   Muhammad Fauzan <developerfauzan@asraja.com>
  */
 
-async function driver(Connection: string) {
-  if (Connection === "mysql") {
-    return new Database("mysql", Mysql);
-  } else if (Connection === "postgres") {
-    return new Database("postgres", Postgres);
-  } else if (Connection === "mongo") {
-    return new Database("mongo", Mongo);
-  }
-}
+const db: Database = new Database(Connection, {
+  host: `${DBInterface.host}`,
+  username: `${DBInterface.username}`,
+  password: `${DBInterface.password}`,
+  database: `${DBInterface.database}`,
+});
 
-export const database = (await driver(Connection)) as any;
+export { db, DataTypes, Model };

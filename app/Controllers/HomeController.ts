@@ -1,7 +1,10 @@
 import { Controller } from "./Controller.ts";
+
+import User from "../Model/User.ts";
+
 import * as dejs from "https://deno.land/x/dejs@0.8.0/mod.ts";
+
 import { RouterContext } from "../../vendor/Denovel/Support/Facades/Request.ts";
-import { User } from "../Model/User.ts";
 
 export class HomeController extends Controller {
   /**
@@ -11,7 +14,9 @@ export class HomeController extends Controller {
    */
 
   async get({ request, response, params }: RouterContext) {
-    response.body = super.validate({ name: "wekwk" });
+    const data = await User.select("id", "username", "password").all();
+
+    response.body = data;
   }
 
   /**

@@ -1,5 +1,7 @@
 import { config } from "https://deno.land/x/dotenv/mod.ts";
 
+const env = config();
+
 /*
 |--------------------------------------------------------------------------
 | Database Connection Interfaces
@@ -10,25 +12,12 @@ import { config } from "https://deno.land/x/dotenv/mod.ts";
 |
 */
 
-export interface mysql {
+export interface dbinterface {
   host: string;
   username: string;
   password: string;
   database: string;
-}
-
-export interface postgres {
-  host: string;
-  username: string;
-  password: string;
-  database: string;
-}
-
-export interface mongo {
-  host: string;
-  username: string;
-  password: string;
-  database: string;
+  port: number;
 }
 
 /*
@@ -47,25 +36,12 @@ export interface mongo {
 |
 */
 
-export const Mysql: mysql = {
-  host: config().DB_HOST || "localhost",
-  username: config().DB_USER || "root",
-  password: config().DB_PASS || "",
-  database: config().DB_NAME || "denovel",
-};
-
-export const Postgres: postgres = {
-  host: config().DB_HOST || "localhost",
-  username: config().DB_USER || "root",
-  password: config().DB_PASS || "",
-  database: config().DB_NAME || "denovel",
-};
-
-export const Mongo: mongo = {
-  host: config().DB_HOST || "mongodb://localhost",
-  username: config().DB_USER, //optional
-  password: config().DB_PASS, //optional
-  database: config().DB_NAME || "denovel",
+export const DBInterface: dbinterface = {
+  host: env.DB_HOST,
+  username: env.DB_USER || "", //optional
+  password: env.DB_PASS || "", //optional
+  database: env.DB_NAME || "denovel",
+  port: parseInt(env.DB_PORT) || 3306,
 };
 
 /**
@@ -74,4 +50,4 @@ export const Mongo: mongo = {
  *
  */
 
-export const Connection = config().DB_CONNECTION;
+export const Connection: any = env.DB_CONNECTION;
