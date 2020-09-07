@@ -15,9 +15,17 @@ Denovel is Web Based Framework made by <a href="https://github.com/fauzan121002"
 - [Table of Contents](#table-of-contents)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Create a controller](#create-a-controller)
-  - [Create a middleware](#create-a-middleware)
-  - [Create a model](#create-a-model)
+  - [Denomand](#denomand)
+    - [Help](#help)
+    - [Create a controller](#create-a-controller)
+    - [Create a middleware](#create-a-middleware)
+    - [Create a model](#create-a-model)
+    - [Create a provider](#create-a-provider)
+  - [Model](#model)
+    - [Model Example](#model-example)
+    - [Model Field Options](#model-field-options)
+    - [Model Datatypes](#model-datatypes)
+    - [Model Relationship](#model-relationship)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -36,13 +44,15 @@ cd denovel
 PORT=8000
 BASE_URL=http://localhost:8000
 
-#only support mysql,mongo,and postgres
-DB_CONNECTION=mysql
+#only support mysql,mongo,sqlite, and postgres
+#you may experience some trouble in mariaDB (mysql)
+#see the problem here https://github.com/manyuanrong/deno_mysql/issues/29
+DB_CONNECTION=postgres
 DB_HOST=localhost
 DB_NAME=denovel
-DB_USER=root
-DB_PASS=
-DB_PORT=3306
+DB_USER=username
+DB_PASS=password
+DB_PORT=5432
 ```
 
 3. **Run the server**
@@ -58,6 +68,15 @@ denon run -A --unstable server.ts
 ```
 
 ## Usage
+
+### Denomand
+Denomand is official command-line interface for [Denovel](https://github.com/fauzan121002/denovel)
+
+### Help
+
+```bash
+deno run -A --unstable denomand.ts help
+```
 
 #### Create a controller
 
@@ -77,6 +96,217 @@ deno run -A --unstable denomand.ts middleware --name </YourMiddlewareName>
 deno run -A --unstable denomand.ts model --name </YourModelName>
 ```
 
+#### Create a provider
+
+```bash
+deno run -A --unstable denomand.ts provider --name </YourProviderName>
+```
+
+### Model
+
+[DenoDB](https://github.com/eveningkid/denodb) is MySQL, SQLite, MariaDB, PostgreSQL and MongoDB ORM for Deno currently used by [Denovel](https://github.com/fauzan121002/denovel)
+
+#### Model Example
+
+```ts
+class User extends Model {
+    static table = "users";
+    static timestamps = false;
+
+    static fields = {
+        id: {
+            primaryKey: true,
+            autoIncrement: true
+        },
+        username: DataTypes.STRING,
+        password: DataTypes.STRING
+    };
+}
+```
+#### Model Field Options
+
+```ts
+  static fields = {
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+      length: 50,
+    },
+  };
+```
+
+type : [Datatypes List](#datatypes-list)
+unique : **boolean**
+allowNull : **boolean**
+length : **integer**
+
+#### Model Datatypes
+
+Example usage of boolean and integer:
+```ts
+class BlockedUsers extends Model {
+    static table = "blocked_users";
+    static timestamps = false;
+
+    static fields = {
+        id: {
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        user_id: {
+            type: DataTypes.INTEGER,
+        },
+        is_verified: {
+            type: DataTypes.BOOLEAN,
+        }
+    };
+}
+```
+
+##### Datatypes List
+More datatypes:
+| Types  |
+| ------------- |
+| BIG_INTEGER  |
+| INTEGER  |
+| DECIMAL  |
+| FLOAT  |
+| UUID  |
+| BOOLEAN  |
+| BINARY  |
+| ENUM  |
+| STRING  |
+| TEXT  |
+| DATE  |
+| DATETIME  |
+| TIME  |
+| TIMESTAMP  |
+| JSON  |
+| JSONP  |
+
+#### Model Relationship
+
+##### One to One : 
+```ts
+import {db, DataTypes, Model} from "../../vendor/Denovel/Support/Facades/DB.ts";
+
+import { Relationships } from 'https://deno.land/x/denodb/mod.ts';
+
+class Owner extends Model {
+  // ...
+
+  // Fetch a business binded to this owner
+  static business() {
+    return this.hasOne(Business);
+  }
+}
+
+class Business extends Model {
+  // ...
+
+  // Fetch an owner binded to this business
+  static owner() {
+    return this.hasOne(Owner);
+  }
+}
+
+Relationships.oneToOne(Business, Owner);
+
+db.link([Owner, Business]);
+```
+
+##### One to Many
+
+```ts
+import {db, DataTypes, Model} from "../../vendor/Denovel/Support/Facades/DB.ts";
+
+import { Relationships } from 'https://deno.land/x/denodb/mod.ts';
+
+class Owner extends Model {
+  static table = 'owners';
+
+  static fields = {
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+    },
+    name: DataTypes.STRING,
+  };
+
+  static businesses() {
+    return this.hasMany(Business);
+  }
+}
+
+class Business extends Model {
+  static table = 'businesses';
+
+  static fields = {
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+    },
+    name: DataTypes.STRING,
+    ownerId: Relationships.belongsTo(Owner),
+  };
+
+  static owner() {
+    return this.hasOne(Owner);
+  }
+}
+
+db.link([Owner, Business]);
+
+```
+##### Many to Many
+
+```ts
+import {db, DataTypes, Model} from "../../vendor/Denovel/Support/Facades/DB.ts";
+
+import { Relationships } from 'https://deno.land/x/denodb/mod.ts';
+
+class Owner extends Model {
+  static table = 'owners';
+
+  static fields = {
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+    },
+    name: DataTypes.STRING,
+  };
+
+  static businesses() {
+    return this.hasMany(Business);
+  }
+}
+
+class Business extends Model {
+  static table = 'businesses';
+
+  static fields = {
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+    },
+    name: DataTypes.STRING,
+  };
+
+  static owners() {
+    return this.hasMany(Owner);
+  }
+}
+
+const BusinessOwner = Relationships.manyToMany(Business, Owner);
+
+db.link([BusinessOwner, Business, Owner]);
+```
+
+Further informations :
+- [One To One](https://eveningkid.github.io/denodb-docs/docs/guides/one-to-one)
+- [One To Many](https://eveningkid.github.io/denodb-docs/docs/guides/one-to-many)
+- [Many To Many](https://eveningkid.github.io/denodb-docs/docs/guides/many-to-many)
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome, make sure to read the [contribution guideline](./CONTRIBUTING.md)

@@ -12,6 +12,13 @@ class User extends Model {
         username: DataTypes.STRING,
         password: DataTypes.STRING
     };
+
+    // Add this when you have problem like https://github.com/eveningkid/denodb/issues/86
+    // eachFieldNameWithAnExclamationMark!: string;
+    // username!: string;
+    // password!: string;
+    // ... (etc)
+
 }
 
 db.link([User]);
