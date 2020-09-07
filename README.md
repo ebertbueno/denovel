@@ -26,8 +26,8 @@ Denovel is Web Based Framework made by <a href="https://github.com/fauzan121002"
     - [Model Field Options](#model-field-options)
     - [Model Datatypes](#model-datatypes)
     - [Model Relationship](#model-relationship)
-- [Contributing](#contributing)
-- [License](#license)
+- [🤝 Contributing](#contributing)
+- [📝 License](#license)
 
 ## Installation
 

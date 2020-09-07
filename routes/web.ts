@@ -1,22 +1,17 @@
-import { Route, router } from "../vendor/Denovel/Support/Facades/Route.ts";
-import {
-  RouterContext,
-  REDIRECT_BACK,
-} from "../vendor/Denovel/Support/Facades/Request.ts";
-import { renderFile } from "https://deno.land/x/dejs/mod.ts";
+import {Route, router} from "../vendor/Denovel/Support/Facades/Route.ts";
+import {RouterContext, REDIRECT_BACK} from "../vendor/Denovel/Support/Facades/Request.ts";
 
-Route.get("/", "HomeController@get");
+Route.get("/:id", "HomeController@get");
 
-Route.group(
-  {
+Route.group({
     prefix: "denovel",
-    middleware: ["EchoMiddleware"],
-  },
-  () => {
+    middleware: ["EchoMiddleware"]
+}, () => {
     Route.get("/about", () => {
-      return "Detail";
+        return "Detail";
     });
-  }
-);
+});
 
-export { router };
+export {
+    router
+};
