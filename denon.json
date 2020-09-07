@@ -1,9 +1,16 @@
 {
-  "$schema": "https://deno.land/x/denon/schema.json",
-  "scripts": {
-    "start": {
-      "cmd": "deno run -A --unstable server.ts",
-      "desc": "Server listener"
+    "$schema": "https://deno.land/x/denon/schema.json",
+    "scripts": {
+        "start": {
+            "cmd": "deno run -A --unstable server.ts",
+            "desc": "Server listener",
+            "exts": [
+                "js",
+                "jsx",
+                "ts",
+                "tsx",
+                "json"
+            ]
+        }
     }
-  }
 }

@@ -1,13 +1,27 @@
-<h1 align="center">Denovel - A Deno Framework For Web Artisan 👋</h1>
+<p align="center"><img src="./denovel.jpg" width="400">
 
-![](https://img.shields.io/github/issues/fauzan121002/denovel?style=flat-square) ![](https://img.shields.io/github/issues/fauzan121002/denovel?style=flat-square) ![](https://img.shields.io/github/stars/fauzan121002/denovel?style=flat-square)
-![](https://img.shields.io/github/forks/fauzan121002/denovel?style=flat-square) ![](https://img.shields.io/github/license/fauzan121002/denovel?style=flat-square) [![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg?style=flat-square)](https://saythanks.io/to/zaidanline67%40gmail.com) [![HitCount](http://hits.dwyl.com/fauzan121002/https://github.com/fauzan121002/denovel.svg)](http://hits.dwyl.com/fauzan121002/https://github.com/fauzan121002/denovel) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=flat-square)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) [![GitHub followers](https://img.shields.io/github/followers/fauzan121002.svg?style=flat-square&label=Follow&maxAge=2592000)](https://github.com/fauzan121002?tab=followers)
+<p align="center">
 
-### 🤔 What is Denovel?
+[![tag](https://img.shields.io/github/tag/fauzan121002/validasaur.svg)](https://github.com/fauzan121002/denovel)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/fauzan121002/denovel/blob/master/LICENSE)
+[![tag](https://img.shields.io/badge/deno-1.3.0,1.3.1-green.svg)](https://github.com/denoland/deno)
 
-## Denovel is Web Based Framework made by <a href="https://github.com/fauzan121002"> Muhammad Fauzan </a>. **Denovel is Inspired by Laravel.**
+</p>
 
-## 💻 Install
+Denovel is Web Based Framework made by <a href="https://github.com/fauzan121002"> Muhammad Fauzan </a>. Denovel is Inspired by [Laravel](https://laravel.com).
+
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Create a controller](#create-a-controller)
+  - [Create a middleware](#create-a-middleware)
+  - [Create a model](#create-a-model)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
 
 1. **Clone Repository**
 
@@ -16,7 +30,7 @@ git clone https://github.com/fauzan121002/denovel.git
 cd denovel
 ```
 
-2. **Open `.env` then changes by your database information**
+2. **Open `.env` then change it by your database information**
 
 ```
 PORT=8000
@@ -31,58 +45,42 @@ DB_PASS=
 DB_PORT=3306
 ```
 
-3.** Run Server **
-You can use denon
-
-```bash
-denon run -A --unstable server.ts
-```
-
-or
+3. **Run the server**
 
 ```bash
 deno run -A --unstable server.ts
 ```
 
-## 💻 How to Create a Controller?
+or you can use denon (make sure you already install denon in your local computer , see the [guide here](https://deno.land/x/denon@2.3.3))
+
+```bash
+denon run -A --unstable server.ts
+```
+
+## Usage
+
+#### Create a controller
 
 ```bash
 deno run -A --unstable denomand.ts controller --name </YourControllerName>
 ```
 
-## 💻 How to Create a Middleware?
+#### Create a middleware
 
 ```bash
 deno run -A --unstable denomand.ts middleware --name </YourMiddlewareName>
 ```
 
-## 💻 How to Create a Model?
+#### Create a model
 
 ```bash
 deno run -A --unstable denomand.ts model --name </YourModelName>
 ```
 
-## 💻 What to do after create a controller?
-
-- Open ControllerMap.ts inside \$ROOT/app to add your controller
-- Open web.ts inside \$ROOT/routes to add routes to your controller
-- Then use your [YourControllerName]! ( See HomeController.ts inside \$ROOT/app/controllers for controller example )
-
-## 🧑 Author
-
-👤 <a href="https://www.facebook.com/fauzandotjs"> **Muhammad Fauzan**</a>
-
-- Facebook : <a href="https://www.facebook.com/fauzandotjs"> Muhammad Fauzan</a>
-- LinkedIn : <a href="https://www.linkedin.com/in/muhammad-fauzan-b6824b18b/"> Muhammad Fauzan</a>
-
 ## 🤝 Contributing
 
-Contributions, issues and feature requests <a href="https://t.me/fauzandevelover"> here</a>
+Contributions, issues and feature requests are welcome, make sure to read the [contribution guideline](./CONTRIBUTING.md)
 
 ## 📝 License
 
-- Copyright © 2020 Muhammad Fauzan.
-
----
-
-- **Made with ❤️ by Muhammad Fauzan.**
+This project is licensed under the terms of the [MIT license](./LICENSE)

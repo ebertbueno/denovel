@@ -1,4 +1,4 @@
-import { config } from "https://deno.land/x/dotenv/mod.ts";
+import {config} from "https://deno.land/x/dotenv/mod.ts";
 
 const env = config();
 
@@ -13,11 +13,11 @@ const env = config();
 */
 
 export interface dbinterface {
-  host: string;
-  username: string;
-  password: string;
-  database: string;
-  port: number;
+    host: string;
+    username: string;
+    password: string;
+    database: string;
+    port: number;
 }
 
 /*
@@ -37,11 +37,11 @@ export interface dbinterface {
 */
 
 export const DBInterface: dbinterface = {
-  host: env.DB_HOST,
-  username: env.DB_USER || "", //optional
-  password: env.DB_PASS || "", //optional
-  database: env.DB_NAME || "denovel",
-  port: parseInt(env.DB_PORT) || 3306,
+    host: env.DB_HOST,
+    username: env.DB_USER || "", // optional
+    password: env.DB_PASS || "", // optional
+    database: env.DB_NAME || "denovel",
+    port: parseInt(env.DB_PORT) || 3306
 };
 
 /**

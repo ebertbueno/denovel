@@ -1,6 +1,6 @@
-import args from "https://deno.land/x/args@2.0.0/wrapper.ts";
-import { Option } from "https://deno.land/x/args@2.0.0/flag-types.ts";
-import { Text } from "https://deno.land/x/args@2.0.0/value-types.ts";
+import args from "https://raw.githubusercontent.com/KSXGitHub/deno-args/2.0.4/lib/wrapper.ts";
+import { Option } from "https://raw.githubusercontent.com/KSXGitHub/deno-args/2.0.5/lib/flag-types.ts";
+import { Text } from "https://raw.githubusercontent.com/KSXGitHub/deno-args/2.0.5/lib/value-types.ts";
 import {
   PARSE_FAILURE,
   MAIN_COMMAND,
@@ -57,59 +57,61 @@ export class Denomand {
       console.log(success(parser.help(...cmdPath)));
     }
 
-    switch (res.tag) {
-      case PARSE_FAILURE:
-        console.error(res.error.toString());
-        Deno.exit(1);
-      case MAIN_COMMAND: {
-        const remaining = res.remaining().rawValues();
-        if (remaining.length) {
-          console.error(`Invalid subcommand: ${remaining[0]}`);
-        } else {
-          console.error("Missing subcommand");
-        }
-        help();
-        Deno.exit(1);
-      }
-      case "help":
-        help(res.remaining().rawValues());
-        break;
-      case "controller": {
-        const { name } = res.value.value;
+    console.log(res.tag)
 
-        (async () => {
-          const encoder = new TextEncoder();
-          const data = encoder.encode(addController(pascalCase(name)));
-          await Deno.writeFile(`app/Controllers/${pascalCase(name)}.ts`, data);
-        })();
+    // switch (res.tag) {
+    //   case PARSE_FAILURE:
+    //     console.error(res.error.toString());
+    //     Deno.exit(1);
+    //   case MAIN_COMMAND: {
+    //     const remaining = res.remaining().rawValues();
+    //     if (remaining.length) {
+    //       console.error(`Invalid subcommand: ${remaining[0]}`);
+    //     } else {
+    //       console.error("Missing subcommand");
+    //     }
+    //     help();
+    //     Deno.exit(1);
+    //   }
+    //   case "help":
+    //     help(res.remaining().rawValues());
+    //     break;
+    //   case "controller": {
+    //     const { name } = res.value.value;
 
-        console.log(success("Controller added successfully"));
-        break;
-      }
-      case "middleware": {
-        const { name } = res.value.value;
+    //     (async () => {
+    //       const encoder = new TextEncoder();
+    //       const data = encoder.encode(addController(pascalCase(name)));
+    //       await Deno.writeFile(`app/Controllers/${pascalCase(name)}.ts`, data);
+    //     })();
 
-        (async () => {
-          const encoder = new TextEncoder();
-          const data = encoder.encode(addMiddleware(pascalCase(name)));
-          await Deno.writeFile(`app/Middleware/${pascalCase(name)}.ts`, data);
-        })();
+    //     console.log(success("Controller added successfully"));
+    //     break;
+    //   }
+    //   case "middleware": {
+    //     const { name } = res.value.value;
 
-        console.log(success("Middleware added successfully"));
-        break;
-      }
-      case "model": {
-        const { name } = res.value.value;
+    //     (async () => {
+    //       const encoder = new TextEncoder();
+    //       const data = encoder.encode(addMiddleware(pascalCase(name)));
+    //       await Deno.writeFile(`app/Middleware/${pascalCase(name)}.ts`, data);
+    //     })();
 
-        (async () => {
-          const encoder = new TextEncoder();
-          const data = encoder.encode(addModel(pascalCase(name)));
-          await Deno.writeFile(`app/Model/${pascalCase(name)}.ts`, data);
-        })();
+    //     console.log(success("Middleware added successfully"));
+    //     break;
+    //   }
+    //   case "model": {
+    //     const { name } = res.value.value;
 
-        console.log(success("Model added successfully"));
-        break;
-      }
-    }
+    //     (async () => {
+    //       const encoder = new TextEncoder();
+    //       const data = encoder.encode(addModel(pascalCase(name)));
+    //       await Deno.writeFile(`app/Model/${pascalCase(name)}.ts`, data);
+    //     })();
+
+    //     console.log(success("Model added successfully"));
+    //     break;
+    //   }
+    // }
   }
 }

@@ -1,4 +1,4 @@
-import { app } from "./bootstrap/app.ts";
+import {app} from "./bootstrap/app.ts";
 
 /**
  * Denovel - A Deno Framework for Web Artisan

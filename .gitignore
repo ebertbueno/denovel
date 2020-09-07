@@ -1,3 +1,5 @@
 playground
 .deno_plugins
 database
+index.html
+test.ts
