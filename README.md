@@ -136,10 +136,13 @@ class User extends Model {
   };
 ```
 
-type : [Datatypes List](#datatypes-list)
-unique : **boolean**
-allowNull : **boolean**
-length : **integer**
+Field Options :
+| Option  | Usage |
+| ------------- | ------------- |
+| type  | [Datatypes List](#datatypes-list)  |
+| unique  | **boolean**  |
+| allowNull  | **boolean**  |
+| length  | **integer**  |
 
 #### Model Datatypes
 
